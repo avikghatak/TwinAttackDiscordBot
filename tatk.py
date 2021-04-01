@@ -52,6 +52,7 @@ async def on_message(message):
           s = str(z[1])
           ans = func(s)
           print(ans)
+          await message.channel.send("Output:")
           await message.channel.send(ans)
 
 
