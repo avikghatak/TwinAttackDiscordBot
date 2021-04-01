@@ -33,13 +33,14 @@ async def on_message(message):
     msg = msg.lower()
 
     if msg.startswith('hi'):
-        await message.channel.send('Hello! Welcome to Twin-Attack!\nTo ask for help enter --help')
+        await message.channel.send('Hello! Welcome to Twin-Attack Round 3!\nTo ask for help enter --help')
 
     if msg.startswith('--help'):
         await message.channel.send('Twin-Attack Bot Help---\nThere are 2 questions in this challenge:\n')
         await message.channel.send('Q1. input format: a string s')
         await message.channel.send('Q2. input format: a string s')
-        await message.channel.send('Input can be entered after placing iq1 or iq2 in the first line followed by the input in the following lines.')
+        await message.channel.send('Input can be entered after placing iq1 or iq2 in the first line followed by the input in the following lines. Each of the strings should contain all lowercase english alphabets only, and greater than 1 characters. i.e, a-z')
+        await message.channel.send('For example to send the string "abcd" for the first question, enter:\niq1\nabcd\n\nFor any more queries ask in the General channel.')
     
     
 
@@ -47,32 +48,56 @@ async def on_message(message):
         
         z = msg.splitlines()
         if (len(z) < 2) or (len(z) > 2):
-          await message.channel.send("Not a valid input\n")
+          await message.channel.send("Not a valid input\nInput must contain 2 lines only")
         else:
-          s = str(z[1])
-          ans = func(s)
-          print(ans)
-          await message.channel.send("Output:")
-          await message.channel.send(ans)
+            s = str(z[1])
+            n = len(s)
+            ok = 1
+            if n <= 1:
+                await message.channel.send("Not a valid input\nString must contain atleast 2 characters.")
+                ok = 0
+            for i in range(n):
+                if (s[i] > 'z' or s[i] < 'a'):
+                    await message.channel.send("Not a valid input\nString must contain only english alphabets")
+                    ok = 0
+            if ok == 0:
+                return         
+            ans = func(s)
+            print(ans)
+            await message.channel.send("Output:")
+            await message.channel.send(ans)
 
 
     if msg.startswith('iq2'):      
         
         z = msg.splitlines()
         if (len(z) < 2) or (len(z) > 2):
-            await message.channel.send("Not a valid input\n")
-        else:
-          s = str(z[1])
-          n=len(s)
-          l1=string.ascii_lowercase+string.ascii_uppercase
-          arr=['a']*n
-          for i in range(n):
-              x=s[i]
-              arr[i] = l1[(l1.index(x) + pow(2, n - i - 1, 52)) % 52]
-          final = ''.join(arr)
-          print(final)
-          await message.channel.send("Output:")
-          await message.channel.send(final)
+            await message.channel.send("Not a valid input\nInput must contain 2 lines only")
+        else:            
+            s = str(z[1])
+            n=len(s)
+            ok = 1
+            if n <= 1:
+                await message.channel.send("Not a valid input\nString must contain atleast 2 characters.")
+                ok = 0
+            for i in range(n):
+                if (s[i] > 'z' or s[i] < 'a'):
+                    await message.channel.send("Not a valid input\nString must contain only english alphabets")
+                    print('not ok')
+                    ok = 0
+                    break
+            if ok == 0:
+                return
+            s=s.lower()
+            l1=string.ascii_lowercase
+            arr=['a']*n
+            for i in range(n):
+                x=s[i]
+                arr[i]=l1[(l1.index(x)+pow(2,n-i-1,26))%26]
+            final = ''.join(arr)
+            print(final)
+            await message.channel.send("Output:")
+            await message.channel.send(final)          
           
         
 
