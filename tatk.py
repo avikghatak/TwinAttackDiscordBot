@@ -32,15 +32,15 @@ async def on_message(message):
     msg = message.content
     msg = msg.lower()
 
-    if msg.startswith('hi'):
+    if msg.startswith('hi') or msg.startswith('hello'):
         await message.channel.send('Hello! Welcome to Twin-Attack Round 3!\nTo ask for help enter --help')
 
     if msg.startswith('--help'):
-        await message.channel.send('Twin-Attack Bot Help---\nThere are 2 questions in this challenge:\n')
-        await message.channel.send('Q1. input format: a string s. s should contain atleast 2 characters.')
+        await message.channel.send('Twin-Attack Bot Help---\n\nThere are 2 questions in this challenge:')
+        await message.channel.send('\nQ1. input format: a string s. s should contain atleast 2 characters.')
         await message.channel.send('Q2. input format: a string s. s should contain atleast 1 characters.')
-        await message.channel.send('Input can be entered after placing iq1 or iq2 in the first line followed by the input in the following lines. Each of the strings should contain all lowercase english alphabets only. i.e, a-z')
-        await message.channel.send('For example to send the string "abcd" for the first question, enter:\niq1\nabcd\n\nFor any more queries ask in the General channel.')
+        await message.channel.send('\n\nInput can be entered after placing iq1 or iq2 in the first line followed by the input in the following lines. Each of the strings should contain all lowercase english alphabets only. i.e, a-z')
+        await message.channel.send('\nFor example to send the string "abcd" for the first question, enter:\niq1\nabcd\n\nFor any more queries ask in the General channel.')
     
     
 
