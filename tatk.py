@@ -60,6 +60,9 @@ async def on_message(message):
                 if (s[i] > 'z' or s[i] < 'a'):
                     await message.channel.send("Not a valid input\nString must contain only english alphabets")
                     ok = 0
+                    print('not ok')
+                    ok = 0
+                    break
             if ok == 0:
                 return         
             ans = func(s)
